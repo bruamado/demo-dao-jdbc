@@ -3,16 +3,26 @@ package application;
 import db.DB;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
+import model.dao.impl.SellerDaoJDBC;
 import model.entities.Department;
 import model.entities.Seller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Program {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
+        System.out.println("Seller Table:");
         SellerDao sellerDao = DaoFactory.createSellerDao();
+        List<Seller> sellerTable = new ArrayList<>();
+        sellerTable = sellerDao.findAll();
+        sellerTable.forEach(System.out::println);
+        System.out.println();
 
         System.out.println("=== TEST 1: seller findById ===");
         Seller seller = sellerDao.findById(3);
@@ -29,6 +39,24 @@ public class Program {
         List<Seller> list2 = sellerDao.findAll();
         list2.forEach(System.out::println);
         System.out.println();
+
+        System.out.println("=== TEST 4: seller deleteById ===");
+        Seller deleted = sellerDao.deleteById(7);
+        System.out.println("deleted = " + deleted);
+        System.out.println();
+
+        System.out.println("=== TEST 5: seller insert ===");
+        //Seller to insert:
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date birthDate = sdf.parse("02/02/1995");
+        Department dep = new Department(2, "Electronics");
+        Seller sellerToInsert = new Seller(null, "Bruno Amado", "bru-a@hotmail.com", birthDate, 8000.0, dep);
+        sellerDao.insert(sellerToInsert);
+        System.out.println();
+
+        System.out.println("Seller Table:");
+        sellerTable = sellerDao.findAll();
+        sellerTable.forEach(System.out::println);
 
         DB.closeConnection();
     }

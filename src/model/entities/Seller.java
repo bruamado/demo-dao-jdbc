@@ -10,7 +10,7 @@ public class Seller implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private Integer Id;
+    private Integer id;
     private String name;
     private String email;
     private Date birthDate;
@@ -20,7 +20,7 @@ public class Seller implements Serializable {
     public Seller(){}
 
     public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary, Department department) {
-        Id = id;
+        this.id = id;
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
@@ -29,11 +29,11 @@ public class Seller implements Serializable {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -81,18 +81,18 @@ public class Seller implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seller seller = (Seller) o;
-        return Objects.equals(Id, seller.Id);
+        return Objects.equals(id, seller.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Seller{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
