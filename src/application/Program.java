@@ -3,7 +3,6 @@ package application;
 import db.DB;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
-import model.dao.impl.SellerDaoJDBC;
 import model.entities.Department;
 import model.entities.Seller;
 
@@ -49,9 +48,15 @@ public class Program {
         //Seller to insert:
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date birthDate = sdf.parse("02/02/1995");
-        Department dep = new Department(2, "Electronics");
+        Department dep = new Department(2, null);
         Seller sellerToInsert = new Seller(null, "Bruno Amado", "bru-a@hotmail.com", birthDate, 8000.0, dep);
         sellerDao.insert(sellerToInsert);
+        if (!(sellerToInsert.getId() == null)) {
+            System.out.println("Seller inserted with success = " + sellerToInsert);
+        }
+        else{
+            System.out.println("Error trying to insert seller.");
+        }
         System.out.println();
 
         System.out.println("Seller Table:");
