@@ -59,6 +59,13 @@ public class Program {
         }
         System.out.println();
 
+        System.out.println("=== TEST 6: seller update ===");
+        seller = sellerDao.findById(1);
+        seller.setName(seller.getName() + " Updated");
+        sellerDao.update(seller);
+        System.out.println("Update completed!");
+        System.out.println();
+
         System.out.println("Seller Table:");
         sellerTable = sellerDao.findAll();
         sellerTable.forEach(System.out::println);
