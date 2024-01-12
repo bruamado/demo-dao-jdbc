@@ -11,10 +11,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Program {
 
     public static void main(String[] args) throws ParseException {
+
+        Scanner sc = new Scanner(System.in);
+
 
         System.out.println("Seller Table:");
         SellerDao sellerDao = DaoFactory.createSellerDao();
@@ -40,7 +44,9 @@ public class Program {
         System.out.println();
 
         System.out.println("=== TEST 4: seller deleteById ===");
-        Seller deleted = sellerDao.deleteById(7);
+        System.out.println("Insert id to delete from table Seller: ");
+        int idToDelete = sc.nextInt();
+        Seller deleted = sellerDao.deleteById(idToDelete);
         System.out.println("deleted = " + deleted);
         System.out.println();
 
@@ -71,5 +77,6 @@ public class Program {
         sellerTable.forEach(System.out::println);
 
         DB.closeConnection();
+        sc.close();
     }
 }
